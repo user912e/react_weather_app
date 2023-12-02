@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { Container } from "react-bootstrap";
+import SearchBar from "./components/searchbar/searchBar";
+import Weather from "./components/weather/weather";
+import Wallpeper from "./components/Wallpeper/Wallpeper";
+import { useSelector } from "react-redux";
+// import DefaultWeather from "./components/Svgs/DefaultWeather";
 
 function App() {
+  const isSetWeather = useSelector((state) => state.weather.isSetWeather);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Wallpeper></Wallpeper>
+      <Container>
+        <SearchBar />
+        {isSetWeather ? (
+          <Weather />
+        ) : (
+          <p className="border border-light border-1 text-light text-center">
+            Please choose a place
+          </p>
+        )}
+      </Container>
+    </>
   );
 }
 
